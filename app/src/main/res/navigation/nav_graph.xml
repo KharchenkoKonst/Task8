@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/helloFragment">
+
+    <fragment
+        android:id="@+id/webView"
+        android:name="com.example.task8.view.fragment.WebView"
+        android:label="fragment_web_view"
+        tools:layout="@layout/fragment_web_view" >
+        <action
+            android:id="@+id/action_webView_to_helloFragment"
+            app:destination="@id/helloFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/helloFragment"
+        android:name="com.example.task8.view.fragment.HelloFragment"
+        android:label="HelloFragment" >
+        <action
+            android:id="@+id/action_helloFragment_to_webView"
+            app:destination="@id/webView" />
+        <action
+            android:id="@+id/action_helloFragment_to_fragmentAnimatedHtml"
+            app:destination="@id/fragmentAnimatedHtml" />
+        <action
+            android:id="@+id/action_helloFragment_to_geolocationFragment"
+            app:destination="@id/geolocationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAnimatedHtml"
+        android:name="com.example.task8.view.fragment.FragmentAnimatedHtml"
+        android:label="FragmentAnimatedHtml" >
+        <action
+            android:id="@+id/action_fragmentAnimatedHtml_to_helloFragment"
+            app:destination="@id/helloFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/geolocationFragment"
+        android:name="com.example.task8.view.fragment.GeolocationFragment"
+        android:label="GeolocationFragment" >
+        <action
+            android:id="@+id/action_geolocationFragment_to_helloFragment"
+            app:destination="@id/helloFragment" />
+    </fragment>
+</navigation>
