@@ -11,18 +11,15 @@ import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.task8.view.activity.MainActivity
 
-class LocationService(private val context: Context) {
+class LocationService(context: Context) {
     private var _currentPosition = MutableLiveData<Location>()
     fun getCurrentPosition(): LiveData<Location> {
         return _currentPosition
     }
 
     init {
-        initLocation()
-    }
-
-    private fun initLocation() {
         val locationManager = context.getSystemService(LOCATION_SERVICE) as LocationManager
         val locationListener = object : LocationListener {
             override fun onLocationChanged(location: Location) {
@@ -38,16 +35,24 @@ class LocationService(private val context: Context) {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            return
+            val permissions = listOf(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+            ActivityCompat.requestPermissions(
+                context as MainActivity,
+                permissions.toTypedArray(),
+                0
+            )
         }
         locationManager.requestLocationUpdates(
-            LocationManager.NETWORK_PROVIDER,
+            LocationManager.GPS_PROVIDER,
             0L,
             0f,
             locationListener
         )
         _currentPosition.value =
-            locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+            locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
         Log.i("current position", _currentPosition.value?.longitude.toString())
     }
 }
