@@ -81,6 +81,7 @@ class GeolocationFragment : Fragment() {
                 }
             } else {
                 requestPermissions()
+                getLastLocation()
             }
         }
 
